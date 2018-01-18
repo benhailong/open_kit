@@ -6,6 +6,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="open_kit" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.json:json:20171018" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/open_kit/META-INF/MANIFEST.MF" />

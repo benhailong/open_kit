@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="open_kit:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/open_kit_jar</output-path>
+    <root id="archive" name="open_kit.jar">
+      <element id="module-output" name="open_kit" />
+    </root>
+  </artifact>
+</component>

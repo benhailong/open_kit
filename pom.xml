@@ -4,18 +4,73 @@
   <groupId>cc.openkit</groupId>
   <artifactId>open_kit</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>open_kit Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20171018</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>open_kit</finalName>
   </build>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/benhailong/open_kit</url>
+    <connection>https://github.com/benhailong/open_kit.git</connection>
+    <developerConnection>http://www.openkit.cc</developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>bigben</name>
+      <email>694201656@qq.com</email>
+      <url>http://www.benhailong.com</url>
+    </developer>
+  </developers>
+
+  <properties>
+    <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+  </properties>
+  <!-- 配置远程发布到私服，mvn deploy -->
+  <distributionManagement>
+    <!--快照版仓库，用于放置不稳定的开发包-->
+    <repository>
+      <id>nexus-releases</id>
+      <name>Maven releases Repository</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+    <!--稳定版仓库，用于放置稳定的开发包-->
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <name>Maven Central Staging Repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 </project>
