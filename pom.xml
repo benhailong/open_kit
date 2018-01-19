@@ -4,9 +4,25 @@
   <groupId>cc.openkit</groupId>
   <artifactId>open_kit</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.2</version>
+  <version>1.0.4</version>
   <name>open_kit Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- spring版本号 -->
+    <spring.version>4.2.5.RELEASE</spring.version>
+    <!-- mybatis版本号 -->
+    <mybatis.version>3.2.8</mybatis.version>
+    <!-- mysql驱动版本号 -->
+    <mysql-driver.version>5.1.29</mysql-driver.version>
+    <!-- log4j日志包版本号 -->
+    <slf4j.version>1.7.18</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+  </properties>
+
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -19,6 +35,35 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20171018</version>
+    </dependency>
+
+    <!--极光-->
+    <dependency>
+      <groupId>cn.jpush.api</groupId>
+      <artifactId>jpush-client</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.jpush.api</groupId>
+      <artifactId>jiguang-common</artifactId>
+      <version>1.0.8</version>
+    </dependency>
+
+    <!-- 添加日志相关jar包 -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
 
   </dependencies>
@@ -54,9 +99,7 @@
     </developer>
   </developers>
 
-  <properties>
-    <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
-  </properties>
+
   <!-- 配置远程发布到私服，mvn deploy -->
   <distributionManagement>
     <!--快照版仓库，用于放置不稳定的开发包-->

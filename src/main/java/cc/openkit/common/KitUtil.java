@@ -1,10 +1,7 @@
-package common;
+package cc.openkit.common;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -57,7 +54,7 @@ public class KitUtil {
      * @param type 状态
      * @return data 时间
      */
-    public static String dataToString(Date date, int type){
+    public static String dataToString(Date date, String type) throws Exception{
         SimpleDateFormat simpleFormat = null;
         simpleFormat = getSimpleDateFormat(type);
         return simpleFormat.format(date);
@@ -70,15 +67,11 @@ public class KitUtil {
      * @return date 时间
      */
 
-    public static Date stringToData(String string,int type){
+    public static Date stringToData(String string,String type)throws Exception{
         SimpleDateFormat simpleFormat = null;
         Date date = null;
-        try {
-            simpleFormat = getSimpleDateFormat(type);
-            date = simpleFormat.parse(string);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        simpleFormat = getSimpleDateFormat(type);
+        date = simpleFormat.parse(string);
         return date;
     }
 
@@ -154,10 +147,10 @@ public class KitUtil {
     /**
      * 返回Map集合
      */
-    public static Map<String, Object> returnMap(String msg, String desc){
+    public static Map<String, Object> returnMap(String code, String msg){
         Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code",code);
         map.put("msg",msg);
-        map.put("desc",desc);
         return map;
     }
     /**
@@ -194,32 +187,34 @@ public class KitUtil {
      * @param type
      * @return
      */
-    private static SimpleDateFormat getSimpleDateFormat(int type) {
+    private static SimpleDateFormat getSimpleDateFormat(String type) throws Exception{
         SimpleDateFormat simpleFormat;
-        if(type==1){
-            simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");//如2016-08-10 20:40
-        } else if(type==2){
-            simpleFormat = new SimpleDateFormat("yyyy-MM-dd");//如2016-08-10
-        } else if(type==3){
-            simpleFormat = new SimpleDateFormat("yyyy/MM");//如2016-08-10
-        } else if(type==4){
-            simpleFormat = new SimpleDateFormat("yyyyMMdd");//如2016-08-10
-        } else if(type==5){
-            simpleFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//如2016-08-10
-        } else if(type==6){
-            simpleFormat = new SimpleDateFormat("yyyyMMddHHmmss");//如2016-08-10
-        } else if(type==7){
-            simpleFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");//如2016-08-10
-        } else if(type==8){
-            simpleFormat = new SimpleDateFormat("HH:mm:ss");//如2016-08-10
-        } else if(type==9){
-            simpleFormat = new SimpleDateFormat("HH:mm");//如2016-08-10
-        } else if(type==10){
-            simpleFormat = new SimpleDateFormat("HHmm");//如2016-08-10
-        }else if(type==11){
-            simpleFormat = new SimpleDateFormat("yyyy-MM");//如2016-08-10
+        if("1".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");//如 2016-08-10 20:40
+        } else if("2".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy-MM-dd");//如 2016-08-10
+        } else if("3".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy/MM");//如 2016/09
+        } else if("4".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyyMMdd");//如 20160911
+        } else if("5".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//如 2016/09/11 12:30:32
+        } else if("6".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyyMMddHHmmss");//如 201609111230
+        } else if("7".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//如 2016/09/11 12:30
+        } else if("8".equals(type)){
+            simpleFormat = new SimpleDateFormat("HH:mm");//如 2016-08-10
+        } else if("9".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy-MM-dd");//如 2016-08-10
+        } else if("10".equals(type)){
+            simpleFormat = new SimpleDateFormat("HH:mm");// 15:30
+        } else if("11".equals(type)){
+            simpleFormat = new SimpleDateFormat("yyyy-MM");//如 2016-08
+        } else if("".equals(type)||type==null){
+            simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 默认以标准格式
         } else {
-            simpleFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//如2016-08-10
+            simpleFormat = new SimpleDateFormat(type);// 否则，传什么现实什么
         }
         return simpleFormat;
     }
