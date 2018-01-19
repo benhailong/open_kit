@@ -1,8 +1,8 @@
 package cc.openkit.kitChat.rongcloud.rong;
 
-import cc.openkit.util.rong.messages.*;
-import cc.openkit.util.rong.models.*;
-import cc.openkit.util.rong.util.GsonUtil;
+import cc.openkit.kitChat.rongcloud.rong.models.*;
+import cc.openkit.kitChat.rongcloud.rong.messages.*;
+import cc.openkit.kitChat.rongcloud.rong.util.GsonUtil;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -97,7 +97,7 @@ public class Example {
 		// 发送系统模板消息方法（一个用户向一个或多个用户发送系统消息，单条消息最大 128k，会话类型为 SYSTEM.每秒钟最多发送 100 条消息，每次最多同时向 100 人发送，如：一次发送 100 人时，示为 100 条消息。） 
 		try {
 			reader = new InputStreamReader(new FileInputStream(JSONFILE+"TemplateMessage.json"));
-			TemplateMessage publishSystemTemplateTemplateMessage  =  (TemplateMessage)GsonUtil.fromJson(reader, TemplateMessage.class);
+			TemplateMessage publishSystemTemplateTemplateMessage  =  (TemplateMessage) GsonUtil.fromJson(reader, TemplateMessage.class);
 			CodeSuccessResult messagePublishSystemTemplateResult = rongCloud.message.publishSystemTemplate(publishSystemTemplateTemplateMessage);
 			System.out.println("publishSystemTemplate:  " + messagePublishSystemTemplateResult.toString());
 		} catch (Exception e) {

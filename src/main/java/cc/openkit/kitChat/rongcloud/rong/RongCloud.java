@@ -7,7 +7,7 @@
  */
 package cc.openkit.kitChat.rongcloud.rong;
 
-import cc.openkit.util.rong.methods.*;
+import cc.openkit.kitChat.rongcloud.rong.methods.*;
 
 import java.util.concurrent.ConcurrentHashMap;
 
