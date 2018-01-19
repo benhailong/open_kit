@@ -13,7 +13,7 @@ import cn.jpush.api.push.model.audience.Audience;
 import cn.jpush.api.push.model.notification.AndroidNotification;
 import cn.jpush.api.push.model.notification.IosNotification;
 import cn.jpush.api.push.model.notification.Notification;
-import cc.openkit.kitPush.jiguang.Model.JPushModel;
+import cc.openkit.kitPush.jiguang.model.JPushModel;
 import org.apache.log4j.Logger;
 
 /**

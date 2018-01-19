@@ -1,5 +1,8 @@
-package cc.openkit.kitPush.jiguang.Model;
+package cc.openkit.kitPush.jiguang.model;
 
+/**
+ * 极光推送实体类
+ */
 public class JPushModel {
     private String appkey;  // 极光推动的 appkey
     private String mastersecret; // 极光推动的 mastersecret
