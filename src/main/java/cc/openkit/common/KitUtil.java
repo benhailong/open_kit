@@ -8,6 +8,11 @@ import java.util.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * QQ交流群
+ * 696279396
+ */
+
 public class KitUtil {
     /**
      * 测试是否调用成功
@@ -52,6 +57,7 @@ public class KitUtil {
      * 时间格式化 data 转 String
      * @param date 时间
      * @param type 状态
+     * @throws Exception 异常处理
      * @return data 时间
      */
     public static String dataToString(Date date, String type) throws Exception{
@@ -63,7 +69,8 @@ public class KitUtil {
     /**
      * 时间格式化 String 转 data
      * @param string 时间字符串
-     * @param type
+     * @param type 类型
+     * @throws Exception 异常处理
      * @return date 时间
      */
 
@@ -93,8 +100,8 @@ public class KitUtil {
 
     /**
      * 生成字母+数字（8位）随机数
-     * @param length
-     * @return
+     * @param length 长度
+     * @return val 转换好的文本
      */
     public static String getStringRandom(int length) {
         String val = "";
@@ -144,8 +151,12 @@ public class KitUtil {
         }
         return figure;
     }
+
     /**
-     * 返回Map集合
+     * 返回Map的集合
+     * @param code 状态码
+     * @param msg 说明
+     * @return map Map 转换好的 map
      */
     public static Map<String, Object> returnMap(String code, String msg){
         Map<String, Object> map = new HashMap<String, Object>();
@@ -153,9 +164,12 @@ public class KitUtil {
         map.put("msg",msg);
         return map;
     }
+
     /**
      * UUID
+     * @return 返回没有'-'的 UUID
      */
+
     public static String uuid(){
         String uuid = UUID.randomUUID().toString();
         return uuid.replaceAll("-","");
@@ -163,7 +177,7 @@ public class KitUtil {
 
     /**
      * 订单编号
-     * @return String
+     * @return s2 String 生成的订单编号
      */
     public static String getOrderCode() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -184,8 +198,9 @@ public class KitUtil {
 
     /**
      * 时间调用 时间格式
-     * @param type
-     * @return
+     * @param type 状态
+     * @throws Exception 异常处理
+     * @return simpleFormat 时间格式
      */
     private static SimpleDateFormat getSimpleDateFormat(String type) throws Exception{
         SimpleDateFormat simpleFormat;
@@ -223,7 +238,7 @@ public class KitUtil {
      * 去除指定字符
      * @param resource  字符串
      * @param ch  需要去除的字符  如：char c=' ';
-     * @return
+     * @return 字符串
      */
     public static String remove(String resource,char ch) {
         StringBuffer buffer=new StringBuffer();
@@ -242,8 +257,8 @@ public class KitUtil {
 
     /**
      * 非空验证
-     * @param string
-     * @return
+     * @param string 需要验证的文字
+     * @return Boolean 返回成功或者失败
      */
     public static Boolean feikong(Object string){
         if (string == null || "".equals(string)) {
@@ -254,8 +269,8 @@ public class KitUtil {
 
     /**
      * 非空验证
-     * @param map
-     * @return
+     * @param map 需要验证的Map集合
+     * @return Map 返回的验证结果
      */
     public static Map<String,Object> isNull(Map<String, Object> map){
         for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -270,9 +285,8 @@ public class KitUtil {
     /**
      * 将Javabean转换为Map
      *
-     * @param javaBean
-     *            javaBean
-     * @return Map对象
+     * @param javaBean  需要转换的 javaBean 对象
+     * @return Map 转换好了的对象
      */
     public static Map toMap(Object javaBean) {
         Map result = new HashMap();
@@ -297,10 +311,9 @@ public class KitUtil {
     /**
      * 将Json对象转换成Map
      *
-     * @param jsonString
-     *            json对象
-     * @return Map对象
-     * @throws JSONException
+     * @param jsonString json对象
+     * @return result 最终的对象
+     * @throws JSONException 异常处理
      */
     public static Map toMap(String jsonString) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonString);
@@ -319,8 +332,7 @@ public class KitUtil {
     /**
      * 将JavaBean转换成JSONObject（通过Map中转）
      *
-     * @param bean
-     *            javaBean
+     * @param bean javaBean
      * @return json对象
      */
     public static JSONObject toJSON(Object bean) {
@@ -359,7 +371,7 @@ public class KitUtil {
      * @param min 最小值
      * @param max 最大值 (min,max]
      * @param num 个数
-     * @return
+     * @return Set 最后生成的set集合
      */
     public static Set<Integer> mathMinToMaxAndNum(int min,int max,int num) {
 
@@ -380,7 +392,7 @@ public class KitUtil {
      * @param number 这是第几个
      * @param restHasNoMoney 已经拆开的没有钱的红包
      * @param scale 带红包的比例
-     * @return
+     * @return Boolean 返回又还是没有
      */
     public static Boolean redPaper(int num, int number, int restHasNoMoney, float scale) {
         // 一共多少个带红包的数量

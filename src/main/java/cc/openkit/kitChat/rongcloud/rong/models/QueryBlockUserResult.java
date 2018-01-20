@@ -49,7 +49,7 @@ public class QueryBlockUserResult {
 	/**
 	 * 获取users
 	 *
-	 * @return List<BlockUsers>
+	 * @return List
 	 */
 	public List<BlockUsers> getUsers() {
 		return users;

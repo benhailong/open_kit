@@ -50,7 +50,7 @@ public class ListBlockChatroomUserResult {
 	/**
 	 * 获取users
 	 *
-	 * @return List<BlockChatRoomUser>
+	 * @return List
 	 */
 	public List<BlockChatRoomUser> getUsers() {
 		return users;

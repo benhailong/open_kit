@@ -50,7 +50,7 @@ public class ListGagChatroomUserResult {
 	/**
 	 * 获取users
 	 *
-	 * @return List<GagChatRoomUser>
+	 * @return List
 	 */
 	public List<GagChatRoomUser> getUsers() {
 		return users;

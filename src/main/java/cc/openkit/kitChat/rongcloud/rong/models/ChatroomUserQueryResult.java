@@ -69,7 +69,7 @@ public class ChatroomUserQueryResult {
 	/**
 	 * 获取users
 	 *
-	 * @return List<ChatRoomUser>
+	 * @return List
 	 */
 	public List<ChatRoomUser> getUsers() {
 		return users;

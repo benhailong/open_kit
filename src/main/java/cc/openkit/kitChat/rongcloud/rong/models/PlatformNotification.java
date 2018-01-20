@@ -46,7 +46,7 @@ public class PlatformNotification {
 	/**
 	 * 获取extras
 	 *
-	 * @return Map<String,String>
+	 * @return Map
 	 */
 	public Map<String,String> getExtras() {
 		return extras;

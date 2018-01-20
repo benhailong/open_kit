@@ -27,6 +27,7 @@ public class Chatroom {
 	 * @param  chatRoomInfo:id:要创建的聊天室的id；name:要创建的聊天室的name。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult create(ChatRoomInfo[] chatRoomInfo) throws Exception {
 		if (chatRoomInfo == null) {
@@ -57,6 +58,7 @@ public class Chatroom {
 	 * @param  chatroomId:要加入的聊天室 Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult join(String[] userId, String chatroomId) throws Exception {
 		if (userId == null) {
@@ -92,6 +94,7 @@ public class Chatroom {
 	 * @param  chatroomId:要查询的聊天室id（必传）
 	 *
 	 * @return ChatroomQueryResult
+	 * @throws Exception
 	 **/
 	public ChatroomQueryResult query(String[] chatroomId) throws Exception {
 		if (chatroomId == null) {
@@ -124,6 +127,7 @@ public class Chatroom {
 	 * @param  order:加入聊天室的先后顺序， 1 为加入时间正序， 2 为加入时间倒序。（必传）
 	 *
 	 * @return ChatroomUserQueryResult
+	 * @throws Exception
 	 **/
 	public ChatroomUserQueryResult queryUser(String chatroomId, String count, String order) throws Exception {
 		if (chatroomId == null) {
@@ -159,6 +163,7 @@ public class Chatroom {
 	 * @param  chatroomId:聊天室 Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult stopDistributionMessage(String chatroomId) throws Exception {
 		if (chatroomId == null) {
@@ -184,6 +189,7 @@ public class Chatroom {
 	 * @param  chatroomId:聊天室 Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult resumeDistributionMessage(String chatroomId) throws Exception {
 		if (chatroomId == null) {
@@ -211,6 +217,8 @@ public class Chatroom {
 	 * @param  minute:禁言时长，以分钟为单位，最大值为43200分钟。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 *
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult addGagUser(String userId, String chatroomId, String minute) throws Exception {
 		if (userId == null) {
@@ -246,6 +254,8 @@ public class Chatroom {
 	 * @param  chatroomId:聊天室 Id。（必传）
 	 *
 	 * @return ListGagChatroomUserResult
+	 *
+	 * @throws Exception
 	 **/
 	public ListGagChatroomUserResult ListGagUser(String chatroomId) throws Exception {
 		if (chatroomId == null) {
@@ -272,6 +282,8 @@ public class Chatroom {
 	 * @param  chatroomId:聊天室Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 *
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult rollbackGagUser(String userId, String chatroomId) throws Exception {
 		if (userId == null) {
@@ -304,6 +316,7 @@ public class Chatroom {
 	 * @param  minute:封禁时长，以分钟为单位，最大值为43200分钟。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult addBlockUser(String userId, String chatroomId, String minute) throws Exception {
 		if (userId == null) {
@@ -339,6 +352,7 @@ public class Chatroom {
 	 * @param  chatroomId:聊天室 Id。（必传）
 	 *
 	 * @return ListBlockChatroomUserResult
+	 * @throws Exception
 	 **/
 	public ListBlockChatroomUserResult getListBlockUser(String chatroomId) throws Exception {
 		if (chatroomId == null) {
@@ -365,6 +379,7 @@ public class Chatroom {
 	 * @param  chatroomId:聊天室 Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult rollbackBlockUser(String userId, String chatroomId) throws Exception {
 		if (userId == null) {
@@ -395,6 +410,7 @@ public class Chatroom {
 	 * @param  objectName:低优先级的消息类型，每次最多提交 5 个，设置的消息类型最多不超过 20 个。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult addPriority(String[] objectName) throws Exception {
 		if (objectName == null) {
@@ -425,6 +441,7 @@ public class Chatroom {
 	 * @param  chatroomId:要销毁的聊天室 Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult destroy(String[] chatroomId) throws Exception {
 		if (chatroomId == null) {
@@ -456,6 +473,7 @@ public class Chatroom {
 	 * @param  userId:聊天室 Id。（必传）
 	 *
 	 * @return CodeSuccessResult
+	 * @throws Exception
 	 **/
 	public CodeSuccessResult addWhiteListUser(String chatroomId, String[] userId) throws Exception {
 		if (chatroomId == null) {

@@ -50,7 +50,7 @@ public class ListGagGroupUserResult {
 	/**
 	 * 获取users
 	 *
-	 * @return List<GagGroupUser>
+	 * @return List
 	 */
 	public List<GagGroupUser> getUsers() {
 		return users;

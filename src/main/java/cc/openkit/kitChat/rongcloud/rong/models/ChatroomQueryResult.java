@@ -50,7 +50,7 @@ public class ChatroomQueryResult {
 	/**
 	 * 获取chatRooms
 	 *
-	 * @return List<ChatRoom>
+	 * @return List
 	 */
 	public List<ChatRoom> getChatRooms() {
 		return chatRooms;

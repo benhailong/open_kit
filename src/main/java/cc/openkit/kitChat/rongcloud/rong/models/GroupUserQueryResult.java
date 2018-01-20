@@ -67,7 +67,7 @@ public class GroupUserQueryResult {
 	/**
 	 * 获取users
 	 *
-	 * @return List<GroupUser>
+	 * @return List
 	 */
 	public List<GroupUser> getUsers() {
 		return users;
