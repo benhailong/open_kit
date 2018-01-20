@@ -93,9 +93,8 @@ public class HttpClientUtil {
     }
 
     /**
-     * 查询字符串转化为map
-     * name1=key1&name2=key2&...
-     * @param queryString
+     *  查询字符串转化为map
+     * @param queryString 需要转换的字符串
      * @return
      */
     public static Map queryString2Map(String queryString) {
@@ -138,7 +137,7 @@ public class HttpClientUtil {
         }
     }
     /**
-     * BufferedReader转换成String<br/>
+     * BufferedReader转换成String
      * 注意:流关闭需要自行处理
      * @param reader
      * @return
@@ -155,7 +154,7 @@ public class HttpClientUtil {
         return buf.toString();
     }
     /**
-     * 处理输出<br/>
+     * 处理输出
      * 注意:流关闭需要自行处理
      * @param out
      * @param data
@@ -240,7 +239,7 @@ public class HttpClientUtil {
      * 注意:流关闭需要自行处理
      * @param in
      * @return byte
-     * @throws Exception
+     * @throws IOException
      */
     public static byte[] InputStreamTOByte(InputStream in) throws IOException{
 
@@ -265,7 +264,7 @@ public class HttpClientUtil {
      * @param in
      * @param encoding 编码
      * @return String
-     * @throws Exception
+     * @throws IOException
      */
     public static String InputStreamTOString(InputStream in,String encoding) throws IOException{
 

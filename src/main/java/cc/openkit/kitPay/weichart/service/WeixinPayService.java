@@ -49,7 +49,7 @@ public interface WeixinPayService {
      * 货币种类	fee_type	否	String(8)	CNY	货币类型，符合ISO4217标准的三位字母代码，默认人民币：CNY，其他值列表详见
      * 现金支付金额	cash_fee	是	Int	100	现金支付金额订单现金支付金额
      * 现金支付货币类型	cash_fee_type	否	String(16)	CNY	货币类型，符合ISO4217标准的三位字母代码，默认人民币：CNY
-     * 代金券金额	coupon_fee	否	Int	10	代金券或立减优惠金额<=订单总金额，订单总金额-代金券或立减优惠金额=现金支付金额
+     * 代金券金额	coupon_fee	否	Int	10	代金券或立减优惠金额“小鱼等于”订单总金额，订单总金额-代金券或立减优惠金额=现金支付金额
      * 代金券使用数量	coupon_count	否	Int	1	代金券或立减优惠使用数量
      * 代金券ID	coupon_id_$n	否	String(20)	10000	代金券或立减优惠ID,$n为下标，从0开始编号
      * 单个代金券支付金额	coupon_fee_$n	否	Int	100	单个代金券或立减优惠支付金额,$n为下标，从0开始编号

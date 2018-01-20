@@ -62,7 +62,6 @@ public class TenpayHttpClient {
     /**
      * 获取结果内容
      * @return String
-     * @throws IOException
      */
     public String getResContent() {
         try {
