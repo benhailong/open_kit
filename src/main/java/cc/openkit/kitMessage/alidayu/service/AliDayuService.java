@@ -102,7 +102,7 @@ public class AliDayuService {
     }
 
 
-    public static void xin(AliDayuModel aliDayuModel)throws ClientException, InterruptedException {
+    public static SendSmsResponse xin(AliDayuModel aliDayuModel)throws ClientException, InterruptedException {
         //发短信
         SendSmsResponse response = sendSms(aliDayuModel);
         System.out.println("短信接口返回的数据----------------");
@@ -134,6 +134,7 @@ public class AliDayuService {
             System.out.println("TotalCount=" + querySendDetailsResponse.getTotalCount());
             System.out.println("RequestId=" + querySendDetailsResponse.getRequestId());
         }
+        return response;
     }
 
 
