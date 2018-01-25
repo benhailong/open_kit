@@ -25,7 +25,6 @@ import java.util.Map;
 public class JPushService {
     private static Logger LOG = Logger.getLogger(JPushService.class);
 
-
     /**
      * 透传给所有人
      * @param jPushModel
