@@ -90,19 +90,13 @@ public class HuafeiService {
     /**
      * 6.历史订单列表
      * @param huafeiConfig 配置信息
-     * @return
+     * @return 列表结果
      * @throws Exception
      */
     public static String orderList(HuafeiConfig huafeiConfig) throws Exception{
         return get(huafeiConfig.getOrderListUrl(),0);
     }
-    /**工具类方法
-     * get 网络请求
-     * @param url 接收请求的网址
-     * @param tts 重试
-     * @return String类型 返回网络请求数据
-     * @throws Exception 网络异常
-     */
+
     public static String get(String url,int tts) throws Exception{
         if(tts>3){//重试3次
             return null;
@@ -126,15 +120,8 @@ public class HuafeiService {
             response.close();
             httpClient.close();
         }
-// 得到的是JSON类型的数据需要第三方解析JSON的jar包来解析
     }
-    /**工具类方法
-     * 此方法是把传进的字节流转化为相应的字符串并返回，此方法一般在网络请求中用到
-     * @param is 输入流
-     * @param charset 字符格式
-     * @return String 类型
-     * @throws Exception
-     */
+
     public static String ConvertStreamToString(InputStream is, String charset)
             throws Exception {
         StringBuilder sb = new StringBuilder();
