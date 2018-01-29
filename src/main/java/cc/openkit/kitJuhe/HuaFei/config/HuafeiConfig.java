@@ -17,7 +17,12 @@ public class HuafeiConfig {
     public HuafeiConfig(String key, String openId){
         this.key = key;
         this.openId = openId;
-
+        this.telCheckUrl = "http://op.juhe.cn/ofpay/mobile/telcheck?cardnum=*&phoneno=!&key="+key;
+        this.telQueryUrl="http://op.juhe.cn/ofpay/mobile/telquery?cardnum=*&phoneno=!&key="+key;
+        this.onlineUrl="http://op.juhe.cn/ofpay/mobile/onlineorder?key="+key+"&phoneno=!&cardnum=*&orderid=@&sign=$";
+        this.yueUrl="http://op.juhe.cn/ofpay/mobile/yue?key="+key+"&"+"timestamp=%&sign=$";
+        this.orderstaUrl="http://op.juhe.cn/ofpay/mobile/ordersta?key="+key+"&orderid=!";
+        this.orderListUrl="http://op.juhe.cn/ofpay/mobile/orderlist?key="+key;
     }
 
 
