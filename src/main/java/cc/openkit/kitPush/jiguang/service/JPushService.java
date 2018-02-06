@@ -32,15 +32,21 @@ public class JPushService {
      */
     public static PushResult touAll(JPushModel jPushModel){
         JPushClient jpushClient = getjPushConfig(jPushModel);
-        PushPayload payload = buildPushObject_tou_all(jPushModel.getCon());
+        PushPayload payload = buildPushObject_tou_all(jPushModel);
         PushResult result = null;
         return getPushResult(jpushClient, payload, result);
     }
 
-    public static PushPayload buildPushObject_tou_all(String con) {
-        return PushPayload.messageAll(con);
+    public static PushPayload buildPushObject_tou_all(JPushModel jPushModel) {
+        return PushPayload.newBuilder()
+                .setPlatform(Platform.all())
+                .setAudience(Audience.all())
+                .setMessage(Message.newBuilder()
+                    .addExtras(jPushModel.getExtras())
+                    .setMsgContent(jPushModel.getCon())
+                    .build())
+                .build();
     }
-
 
     /**
      * 透传给一群人（包括1个人）
@@ -58,7 +64,10 @@ public class JPushService {
         return PushPayload.newBuilder()
                 .setPlatform(Platform.all())
                 .setAudience(Audience.alias(jPushModel.getUserid()))
-                .setMessage(Message.content(jPushModel.getCon()))
+                .setMessage(Message.newBuilder()
+                    .addExtras(jPushModel.getExtras())
+                    .setMsgContent(jPushModel.getCon())
+                    .build())
                 .build();
     }
 
@@ -132,7 +141,6 @@ public class JPushService {
                         .build())
                 .build();
     }
-
 
 
     private static PushResult getPushResult(JPushClient jpushClient, PushPayload payload, PushResult result) {
