@@ -7,69 +7,100 @@ package cc.openkit.kitMessage.ucpaas.model;
  * 验证码短信模板
  */
 public class UcpaasModel {
-    private String accountSid;
-    private String authToken;
-    private String templateId;
-    private String appId;
-    private String phone;
-    private String code;
+    // 指定模板单发、指定模板群发  需要发送的  额外参数
+    private String param;
+    private String mobile;
+    private String uid;
+    private String templateid;  // 短信模板
 
-    public UcpaasModel(){
+    // 增加、编辑模板的时候 需要的额外参数
+    private String type;
+    private String template_name;
+    private String autograph;
+    private String content;
 
+    // 查询的时候需要的额外参数
+    private String page_num;
+    private String page_size;
+
+
+    public String getParam() {
+        return param;
     }
 
-    public UcpaasModel(String accountSid, String authToken, String templateId, String appId, String phone, String code){
-        this.accountSid = accountSid;
-        this.authToken = authToken;
-        this.templateId = templateId;
-        this.appId = appId;
-        this.phone = phone;
-        this.code = code;
+    public void setParam(String param) {
+        this.param = param;
     }
 
-    public String getAccountSid() {
-        return accountSid;
-    }
-    public void setAccountSid(String accountSid) {
-        this.accountSid = accountSid;
-    }
-    public String getAuthToken() {
-        return authToken;
-    }
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public String getMobile() {
+        return mobile;
     }
 
-    public String getTemplateId() {
-        return templateId;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getUid() {
+        return uid;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setTemplateId(String templateId) {
-
-        this.templateId = templateId;
+    public String getType() {
+        return type;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getTemplate_name() {
+        return template_name;
     }
 
-    public String getCode() {
-        return code;
+    public void setTemplate_name(String template_name) {
+        this.template_name = template_name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getAutograph() {
+        return autograph;
+    }
+
+    public void setAutograph(String autograph) {
+        this.autograph = autograph;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getPage_num() {
+        return page_num;
+    }
+
+    public void setPage_num(String page_num) {
+        this.page_num = page_num;
+    }
+
+    public String getPage_size() {
+        return page_size;
+    }
+
+    public void setPage_size(String page_size) {
+        this.page_size = page_size;
+    }
+
+    public String getTemplateid() {
+        return templateid;
+    }
+
+    public void setTemplateid(String templateid) {
+        this.templateid = templateid;
     }
 }
