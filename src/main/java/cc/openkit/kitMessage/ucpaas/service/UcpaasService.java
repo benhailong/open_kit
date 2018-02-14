@@ -141,7 +141,7 @@ public class UcpaasService {
 	}
 
 	/**
-	 * 编辑模板
+	 * 删除模板
 	 * @param config 配置文件
 	 * @param model 内容模型
 	 * @return String 返回值
