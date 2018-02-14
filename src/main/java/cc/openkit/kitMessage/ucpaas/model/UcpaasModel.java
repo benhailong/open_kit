@@ -8,9 +8,9 @@ package cc.openkit.kitMessage.ucpaas.model;
  */
 public class UcpaasModel {
     // 指定模板单发、指定模板群发  需要发送的  额外参数
-    private String param;
-    private String mobile;
-    private String uid;
+    private String param;  // 参数 多个参数 , 号隔开
+    private String mobile;  //  接收的手机号码
+    private String uid;  //  推送的唯一id
     private String templateid;  // 短信模板
 
     // 增加、编辑模板的时候 需要的额外参数
