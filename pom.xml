@@ -4,7 +4,7 @@
   <groupId>cc.openkit</groupId>
   <artifactId>open_kit</artifactId>
   <packaging>jar</packaging>
-  <version>1.1.6</version>
+  <version>1.1.7</version>
   <name>open_kit Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -118,11 +118,18 @@
       <version>4.5.3</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/net.guerlab/sdk-alipay-core -->
+    <!--  第三方提供的 Alipay 插件  -->
     <dependency>
-      <groupId>net.guerlab</groupId>
-      <artifactId>sdk-alipay-core</artifactId>
-      <version>1.2.0</version>
+      <groupId>org.apache.avalon.framework</groupId>
+      <artifactId>avalon-framework-api</artifactId>
+      <version>4.3.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.ow2.util.log/log-api -->
+
+
+
+
+    <!-- Alipay 结束 -->
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>

@@ -33,7 +33,7 @@ public class AliPayConfig {
      */
     public String charset;
     /**
-     * 设置字符集编码
+     * 仅支持JSON
      */
     public String format;
     /**
