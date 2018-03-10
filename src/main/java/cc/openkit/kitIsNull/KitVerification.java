@@ -38,6 +38,97 @@ public class KitVerification {
                 e.printStackTrace();
             }
 
+            // 先要查看是不是 plus
+            boolean kitIsPlusExists = field.isAnnotationPresent(KitIsPlus.class);
+            if(kitIsPlusExists){
+                // 取值
+                KitIsPlus kitIsPlus = (KitIsPlus) field.getAnnotation(KitIsPlus.class);
+                String condition = kitIsPlus.condition();// 所有条件
+                String rule = kitIsPlus.rule();// 是否有自定义的的正则表达式
+                String value = kitIsPlus.value();// 返回报错信息
+
+                //  phone|code|email|min:10|max:20
+                Boolean f = false;
+
+                // 分割字符串
+                String[] conditionArray = condition.split(",");
+                String[] valueArray = value.split(",");
+
+                // 拼接的验证
+                for (int i = 0; i < conditionArray.length; i++) {
+                    // 先判断是不是可以根据 ： 分割
+                    String[] caa = conditionArray[i].split(":");
+                    // 如果带有嵌套属性
+                    if(caa.length>1){
+                        if("min".equals(caa[0])){
+                            // 比较最短是不是符合
+                            f = String.valueOf(filedValue).length() > Integer.parseInt(caa[1]);
+                            if(!f){
+                                return KitUtil.returnMap("101",valueArray[i]);
+                            }
+                        }
+                        if("max".equals(caa[0])){
+                            f = String.valueOf(filedValue).length() < Integer.parseInt(caa[1]);
+                            if(!f){
+                                return KitUtil.returnMap("101",valueArray[i]);
+                            }
+                        }
+                        continue;
+                    }
+
+                    // 如果不是那么单个验证
+                    if("phone".equals(conditionArray[i])){
+                        if(!isMobile(String.valueOf(filedValue))){
+                            map = KitUtil.returnMap("101",valueArray[i]);
+                            return map;
+                        }
+                        continue;
+                    }
+                    if("code".equals(conditionArray[i])){
+                        if(!isIDCard(String.valueOf(filedValue))){
+                            map = KitUtil.returnMap("101",valueArray[i]);
+                            return map;
+                        }
+                        continue;
+                    }
+                    if("email".equals(conditionArray[i])){
+                        if(!isEmail(String.valueOf(filedValue))){
+                            map = KitUtil.returnMap("101",valueArray[i]);
+                            return map;
+                        }
+                        continue;
+                    }
+                    if("null".equals(conditionArray[i])){
+                        if(!KitUtil.feikong(String.valueOf(filedValue))){
+                            map = KitUtil.returnMap("101",valueArray[i]);
+                            return map;
+                        }
+                        continue;
+                    }
+                    if("url".equals(conditionArray[i])){
+                        if(!isUrl(String.valueOf(filedValue))){
+                            map = KitUtil.returnMap("101",valueArray[i]);
+                            return map;
+                        }
+                        continue;
+                    }
+
+                }
+
+                // 自定义的组合验证
+                if(KitUtil.feikong(rule)){
+                    // 验证
+                    if(!isOther(rule,String.valueOf(filedValue))){
+                        // 如果为空，说明不符合，返回值
+                        map = KitUtil.returnMap("101",valueArray[valueArray.length-1]);
+                        return map;
+                    }
+                }
+
+                continue;
+            }
+
+
             // 查看是不是验证非空
             boolean fExists = field.isAnnotationPresent(KitIsNull.class);
             // 如果是ISnull说明不能为空，那就直接找到他的get里边的内容看看是不是为空
@@ -149,7 +240,7 @@ public class KitVerification {
             boolean kitIsOtherExists = field.isAnnotationPresent(KitIsOther.class);
             KitIsOther isNull = (KitIsOther) field.getAnnotation(KitIsOther.class);
             if(kitIsOtherExists){
-                // 验证是不是邮箱
+
                 boolean a = isOther(isNull.rule(),String.valueOf(filedValue));
                 System.out.println("a = "+a);
 
@@ -161,6 +252,7 @@ public class KitVerification {
                 }
                 continue;
             }
+
         }
 
         map = KitUtil.returnMap("200","");
