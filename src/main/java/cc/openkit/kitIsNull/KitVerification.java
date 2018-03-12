@@ -99,7 +99,7 @@ public class KitVerification {
                         continue;
                     }
                     if("null".equals(conditionArray[i])){
-                        if(!KitUtil.feikong(String.valueOf(filedValue))){
+                        if(filedValue==null || "".equals(filedValue)){
                             map = KitUtil.returnMap("101",valueArray[i]);
                             return map;
                         }
