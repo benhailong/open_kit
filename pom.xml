@@ -4,7 +4,7 @@
   <groupId>cc.openkit</groupId>
   <artifactId>open_kit</artifactId>
   <packaging>jar</packaging>
-  <version>1.1.11</version>
+  <version>1.1.14</version>
   <name>open_kit Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -78,11 +78,13 @@
       <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
       <version>1.0.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
     <dependency>
-      <groupId>com.airlenet</groupId>
-      <artifactId>play-aliyun-dysms</artifactId>
-      <version>2.0.0</version>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>3.5.1</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -126,9 +128,6 @@
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.ow2.util.log/log-api -->
 
-
-
-
     <!-- Alipay 结束 -->
     <dependency>
       <groupId>io.netty</groupId>
@@ -140,7 +139,7 @@
     <dependency>
       <groupId>com.qiniu</groupId>
       <artifactId>qiniu-java-sdk</artifactId>
-      <version>7.2.6</version>
+      <version>7.2.11</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -161,8 +160,6 @@
       <version>0.1.4</version>
       <scope>compile</scope>
     </dependency>
-
-
 
 
 
