@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface KitIsCode {
-    String value();
+    String value() default "身份证号码格式不对";
 }

@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface KitIsUrl {
-    String value();
+    String value() default "链接地址格式不对";
 }

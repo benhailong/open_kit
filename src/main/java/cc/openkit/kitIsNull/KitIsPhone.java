@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface KitIsPhone {
-    String value();
+    String value() default "手机号码格式不对";
 }

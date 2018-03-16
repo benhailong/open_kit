@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface KitIsLong {
     // 最短长度，如果为 -1 标识不设置
-    int min();
+    int min() default -1;
     // 最大长度，如果为 -1 标识不设置
-    int max();
-    String value();
+    int max() default -1;
+    String value() default "长度不符合要求";
 }
