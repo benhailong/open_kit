@@ -120,12 +120,11 @@ public class QIniuService {
      * 字节数组上传
      * 可以支持将内存中的字节数组上传到空间中。
      * @param qiniuConfig
-     * @param bytes 字节
-     * @param charsetName 格式，默认UTF-8
+     * @param uploadBytes 数据流
      * @param zoneAdd 空间对应参数
      * @return map
      */
-    public static Map<String,Object> uploadByByteArray(QiniuConfig qiniuConfig, String bytes, String charsetName, String zoneAdd){
+    public static Map<String,Object> uploadByByteArray(QiniuConfig qiniuConfig, byte[] uploadBytes, String zoneAdd){
         Map<String,Object> map = new HashMap<String,Object>();
         //构造一个带指定Zone对象的配置类
         Zone zone = getZone(zoneAdd);
@@ -139,10 +138,8 @@ public class QIniuService {
         String bucket = qiniuConfig.getBucket();
 
         try {
-            byte[] uploadBytes = bytes.getBytes(charsetName);
             Auth auth = Auth.create(accessKey, secretKey);
             String upToken = auth.uploadToken(bucket);
-
             try {
                 Response response = uploadManager.put(uploadBytes, qiniuConfig.getKey(), upToken);
                 //解析上传成功的结果
@@ -159,7 +156,7 @@ public class QIniuService {
                     //ignore
                 }
             }
-        } catch (UnsupportedEncodingException ex) {
+        } catch (Exception ex) {
             //ignore
             map = KitUtil.returnMap("101","上传失败");
         }
@@ -170,12 +167,11 @@ public class QIniuService {
     /**
      * 数据流上传
      * @param qiniuConfig
-     * @param bytes 数据流
-     * @param charsetName 数据格式，比如
+     * @param uploadBytes 数据流
      * @param zoneAdd 空间对应参数
      * @return map
      */
-    public static Map<String,Object> uploadByFileRecorder(QiniuConfig qiniuConfig, String bytes, String charsetName, String zoneAdd){
+    public static Map<String,Object> uploadByFileRecorder(QiniuConfig qiniuConfig,byte[] uploadBytes, String zoneAdd){
         Map<String,Object> map = new HashMap<String,Object>();
         //构造一个带指定Zone对象的配置类
         Zone zone = getZone(zoneAdd);
@@ -188,7 +184,6 @@ public class QIniuService {
         String bucket = qiniuConfig.getBucket();
         //默认不指定key的情况下，以文件内容的hash值作为文件名
         try {
-            byte[] uploadBytes = bytes.getBytes(charsetName);
             ByteArrayInputStream byteInputStream=new ByteArrayInputStream(uploadBytes);
             Auth auth = Auth.create(accessKey, secretKey);
             String upToken = auth.uploadToken(bucket);
@@ -210,7 +205,7 @@ public class QIniuService {
                     //ignore
                 }
             }
-        } catch (UnsupportedEncodingException ex) {
+        } catch (Exception ex) {
             //ignore
             map = KitUtil.returnMap("101","上传失败");
         }
