@@ -42,7 +42,7 @@ public class KitFileUtil {
      * @param filePath 文件路径
      * @return
      */
-    public static byte[] getBytesToMultipartFile(String filePath){
+    public static byte[] getBytesByFilePath(String filePath){
         byte[] buffer = null;
         try {
             File file = new File(filePath);
