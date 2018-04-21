@@ -11,7 +11,7 @@ public class KitFileUtil {
      * @param multfile
      * @return
      */
-    public static byte[] getBytesByMultipartFile(MultipartFile multfile){
+    public static byte[] getMultipartFileToBytes(MultipartFile multfile){
         byte[] buffer = null;
         // MultipartFile 转 filef
         CommonsMultipartFile cf = (CommonsMultipartFile)multfile;
@@ -42,7 +42,7 @@ public class KitFileUtil {
      * @param filePath 文件路径
      * @return
      */
-    public static byte[] getBytes(String filePath){
+    public static byte[] getBytesToMultipartFile(String filePath){
         byte[] buffer = null;
         try {
             File file = new File(filePath);
@@ -70,7 +70,7 @@ public class KitFileUtil {
      * @param filePath 需要保存的文件路径
      * @param fileName 需要保存的文件的名称
      */
-    public static void getFile(byte[] bfile, String filePath,String fileName) {
+    public static void getBytesToFile(byte[] bfile, String filePath,String fileName) {
         BufferedOutputStream bos = null;
         FileOutputStream fos = null;
         File file = null;
