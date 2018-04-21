@@ -43,6 +43,20 @@ public class KitFileUtil {
      * @return
      */
     public static byte[] getBytesByFilePath(String filePath){
+        return getBytes(filePath);
+    }
+
+    /**
+     * 获得指定文件的byte数组,根据文件路径
+     * @param filePath 文件路径
+     * @return
+     */
+    @Deprecated
+    public static byte[] getBytesToMultipartFile(String filePath){
+        return getBytes(filePath);
+    }
+
+    private static byte[] getBytes(String filePath) {
         byte[] buffer = null;
         try {
             File file = new File(filePath);
