@@ -4,7 +4,9 @@ package cc.openkit.kitPay.alipay.service.impl;
 import cc.openkit.common.KitUtil;
 import cc.openkit.kitPay.alipay.config.AliPayConfig;
 import cc.openkit.kitPay.alipay.model.Alipay;
+import cc.openkit.kitPay.alipay.model.AlipayRefundModel;
 import cc.openkit.kitPay.alipay.model.AlipayToIndividual;
+import cc.openkit.kitPay.alipay.model.GoodsDetail;
 import cc.openkit.kitPay.alipay.service.AlipayService;
 import cc.openkit.kitPay.weichart.util.XMLUtil;
 import com.alipay.api.AlipayApiException;
@@ -102,6 +104,93 @@ public class AlipayServiceImpl implements AlipayService {
             e.printStackTrace();
         }
 
+        return returnResponse(response);
+    }
+
+    /**
+     * 支付宝订单退款
+     * @param aliPayConfig
+     * @param alipayRefundModel
+     * @return
+     */
+    public boolean refund(AliPayConfig aliPayConfig, AlipayRefundModel alipayRefundModel) {
+
+        String alipayOpenRefundUrl = "https://openapi.alipay.com/gateway.do";
+
+        //实例化客户端
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayOpenRefundUrl, aliPayConfig.getAppId(), aliPayConfig.getPrivateKey(), aliPayConfig.getFormat(), aliPayConfig.getCharset(), aliPayConfig.getPublicKey(), aliPayConfig.getSignType());
+
+        AlipayFundTransToaccountTransferRequest request = new AlipayFundTransToaccountTransferRequest();
+
+        StringBuffer json = new StringBuffer("{");
+        json.append("\"refund_amount\":"+alipayRefundModel.getRefundAmount()+",");
+
+        if(isNull(alipayRefundModel.getOutTradeNo())){
+            json.append("\"out_trade_no\":\""+alipayRefundModel.getOutTradeNo()+"\",");
+        }
+        if(isNull(alipayRefundModel.getTradeNo())){
+            json.append("\"trade_no\":\""+alipayRefundModel.getTradeNo()+"\",");
+        }
+
+        if(isNull(alipayRefundModel.getRefundCurrency())) {
+            json.append("\"refund_currency\":\"" + alipayRefundModel.getRefundCurrency() + "\",");
+        }
+        if(isNull(alipayRefundModel.getRefundReason())) {
+            json.append("\"refund_reason\":\"" + alipayRefundModel.getRefundReason() + "\",");
+        }
+        if(isNull(alipayRefundModel.getOutRequestNo())) {
+            json.append("\"out_request_no\":\"" + alipayRefundModel.getOutRequestNo() + "\",");
+        }
+        if(alipayRefundModel.getGoodsDetail()!=null && !"".equals(alipayRefundModel.getGoodsDetail())) {
+            json.append("\"operator_id\":\"" + alipayRefundModel.getGoodsDetail() + "\",");
+        }
+        if(isNull(alipayRefundModel.getStoreId())) {
+            json.append("\"store_id\":\"" + alipayRefundModel.getStoreId() + "\",");
+        }
+        if(isNull(alipayRefundModel.getTerminalId())) {
+            json.append("\"terminal_id\":\"" + alipayRefundModel.getTerminalId() + "\",");
+        }
+        int i = alipayRefundModel.getGoodsDetail().size();
+        if(i>0){
+            json.append( "\"goods_detail\":[{");
+            for(int m = 0; m < i; m++){
+                GoodsDetail gd = alipayRefundModel.getGoodsDetail().get(m);
+                json.append("\"goods_id\":\""+gd.getGoodsId()+"\",");
+                if(isNull(gd.getAlipayGoodsId())){
+                    json.append("\"alipay_goods_id\":\"" + gd.getAlipayGoodsId() + "\",");
+                }
+                json.append("\"goods_name\":\""+gd.getGoodsName()+"\",");
+                json.append("\"quantity\":\""+gd.getQuantity()+"\",");
+                json.append("\"price\":\""+gd.getPrice()+"\",");
+                if(isNull(gd.getGoodsCategory())){
+                    json.append("\"goods_category\":\"" + gd.getGoodsCategory() + "\",");
+                }
+                if(isNull(gd.getBody())){
+                    json.append("\"body\":\"" + gd.getBody() + "\",");
+                }
+                if(isNull(gd.getShowUrl())){
+                    json.append("\"show_url\":\"" + gd.getShowUrl() + "\",");
+                }
+            }
+            json.append( "}]");
+        }
+        json.append( "}");
+        System.out.println("请求的json格式"+json.toString());
+        request.setBizContent(json.toString());
+        AlipayFundTransToaccountTransferResponse response = null;
+        try {
+            response = alipayClient.execute(request);
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+        return returnResponse(response);
+    }
+
+    private boolean isNull(String outTradeNo) {
+        return outTradeNo != null && !"".equals(outTradeNo);
+    }
+
+    private boolean returnResponse(AlipayFundTransToaccountTransferResponse response) {
         if(response.isSuccess()){
             System.out.println("调用成功");
             return true;
@@ -109,9 +198,6 @@ public class AlipayServiceImpl implements AlipayService {
             System.out.println("调用失败");
             return false;
         }
-
-
-
     }
 
 
