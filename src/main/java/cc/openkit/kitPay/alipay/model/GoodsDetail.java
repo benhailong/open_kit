@@ -1,5 +1,8 @@
 package cc.openkit.kitPay.alipay.model;
 
+/**
+ * 退款对象中的产品参数对象
+ */
 public class GoodsDetail {
     // 是否必选     最大长度    描述  示例
     // 必填	32	商品的编号	apple-01

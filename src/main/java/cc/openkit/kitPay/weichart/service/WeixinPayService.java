@@ -1,6 +1,7 @@
 package cc.openkit.kitPay.weichart.service;
 
 import cc.openkit.kitPay.weichart.model.WeichartModel;
+import cc.openkit.kitPay.weichart.model.WeichartRefundModel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,4 +62,14 @@ public interface WeixinPayService {
      * @return map
      */
     public Map<String, String> getnotify(HttpServletRequest request, HttpServletResponse response) throws IOException;
+
+    /**
+     * 退款接口
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+
+    public Map<String, String> refund(HttpServletRequest request, HttpServletResponse response,  WeichartModel weichartModel, WeichartRefundModel weichartRefundModel)
+            throws Exception;
 }

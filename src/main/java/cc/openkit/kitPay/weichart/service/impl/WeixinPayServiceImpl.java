@@ -2,6 +2,7 @@ package cc.openkit.kitPay.weichart.service.impl;
 
 import cc.openkit.kitPay.weichart.handler.PrepayIdRequestHandler;
 import cc.openkit.kitPay.weichart.model.WeichartModel;
+import cc.openkit.kitPay.weichart.model.WeichartRefundModel;
 import cc.openkit.kitPay.weichart.service.WeixinPayService;
 //import cc.openkit.kitPay.weichart.util.ConstantUtil;
 import cc.openkit.kitPay.weichart.util.Md5Util;
@@ -59,8 +60,6 @@ public class WeixinPayServiceImpl implements WeixinPayService {
 
         System.out.println("IP:"+weichartModel.getSpbillCreateIp());
         // 这里是获取服务器的请求的Ip地址，上线之后可以用上面的代替，或者再config里边代替
-//        prepayReqHandler.setParameter("spbill_create_ip", request.getRemoteAddr());
-
         prepayReqHandler.setParameter("spbill_create_ip", weichartModel.getSpbillCreateIp());
 
         System.out.println("prepayReqHandler:"+prepayReqHandler.getParameter("spbill_create_ip"));
@@ -137,38 +136,103 @@ public class WeixinPayServiceImpl implements WeixinPayService {
         System.out.println("=========:" + result);
 
         return map;
-
-
-
-         // 若支付成功，则告知微信服务器收到通知
-//         if (map.get("return_code").equals("SUCCESS")) {
-//             if (map.get("result_code").equals("SUCCESS")) {
-//             System.out.println("充值成功！");
-//             // 查找
-//             PayRecord payRecord=payRecordService.get(Long.valueOf(map.get("out_trade_no")));
-//
-//
-//             System.out.println("订单号："+Long.valueOf(map.get("out_trade_no")));
-//             System.out.println("payRecord.getPayTime():"+payRecord.getPayTime()==null+","+payRecord.getPayTime());
-//             //判断通知是否已处理，若已处理，则不予处理
-//             if(payRecord.getPayTime()==null){
-//             System.out.println("通知微信后台");
-//             payRecord.setPayTime(new Date());
-//             String phone=payRecord.getPhone();
-//             AppCustomer appCustomer=appCustomerService.getByPhone(phone);
-//             float balance=appCustomer.getBalance();
-//             balance+=Float.valueOf(map.get("total_fee"))/100;
-//             appCustomer.setBalance(balance);
-//
-//             appCustomerService.update(appCustomer);
-//             payRecordService.update(payRecord);
-//
-//
-//             String notifyStr = XMLUtil.setXML("SUCCESS", "");
-//             writer.write(notifyStr);
-//             writer.flush();
-//             }
-//             }
-//         }
     }
+
+
+
+    /**
+     * 退款接口
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @Override
+    public Map<String, String> refund(HttpServletRequest request, HttpServletResponse response, WeichartModel weichartModel, WeichartRefundModel weichartRefundModel)
+            throws Exception {
+        String gateUrl = "https://api.mch.weixin.qq.com/secapi/pay/refund";
+
+        // 获取生成预支付订单的请求类
+        PrepayIdRequestHandler prepayReqHandler = new PrepayIdRequestHandler(request, response);
+
+        String signs = "";
+
+        prepayReqHandler.setParameter("appid", weichartModel.getAppId());
+        signs = signs + "appid="+weichartModel.getAppId();
+        prepayReqHandler.setParameter("mch_id", weichartModel.getMchId());
+        signs = signs + "&mch_id="+weichartModel.getMchId();
+
+        // 加密一会儿处理
+        prepayReqHandler.setParameter("nonce_str", weichartRefundModel.getNonceStr());
+        signs = signs + "&nonce_str="+weichartRefundModel.getNonceStr();
+        if(isNull(weichartRefundModel.getNotifyUrl())){
+            prepayReqHandler.setParameter("notify_url", weichartRefundModel.getNotifyUrl());
+            signs = signs + "&notify_url="+weichartRefundModel.getNotifyUrl();
+        }
+        prepayReqHandler.setParameter("out_refund_no", weichartRefundModel.getOutRefundNo());
+        signs = signs + "&out_refund_no="+weichartRefundModel.getOutRefundNo();
+        if(isNull(weichartRefundModel.getOutTradeNo())){
+            prepayReqHandler.setParameter("out_trade_no", weichartRefundModel.getOutTradeNo());
+            signs = signs + "&out_trade_no="+weichartRefundModel.getOutTradeNo();
+        }
+        if(isNull(weichartRefundModel.getRefundAccount())){
+            prepayReqHandler.setParameter("refund_account", weichartRefundModel.getRefundAccount());
+            signs = signs + "&refund_account="+weichartRefundModel.getRefundAccount();
+        }
+        if(isNull(weichartRefundModel.getRefundDesc())){
+            prepayReqHandler.setParameter("refund_desc", weichartRefundModel.getRefundDesc());
+            signs = signs + "&refund_desc="+weichartRefundModel.getRefundDesc();
+        }
+        prepayReqHandler.setParameter("refund_fee", weichartRefundModel.getRefundFee());
+        signs = signs + "&refund_fee="+weichartRefundModel.getRefundFee();
+        if(isNull(weichartRefundModel.getRefundFeeType())){
+            prepayReqHandler.setParameter("refund_fee_type", weichartRefundModel.getRefundFeeType());
+            signs = signs + "&refund_fee_type="+weichartRefundModel.getRefundFeeType();
+        }
+
+        // 判断字段是否为空
+        if(isNull(weichartRefundModel.getSignType())){
+            prepayReqHandler.setParameter("sign_type", weichartRefundModel.getSignType());
+            signs = signs + "&sign_type="+weichartRefundModel.getSignType();
+        }
+        prepayReqHandler.setParameter("total_fee", weichartRefundModel.getTotalFee());
+        signs = signs + "&total_fee="+weichartRefundModel.getTotalFee();
+        if(isNull(weichartRefundModel.getTransactionId())){
+            prepayReqHandler.setParameter("transaction_id", weichartRefundModel.getTransactionId());
+            signs = signs + "&transaction_id="+weichartRefundModel.getTransactionId();
+        }
+        signs = signs + "&key="+weichartModel.getAppKey();
+        System.out.println("拼接好的 sign = "+ signs);
+
+
+        /**
+         * 注意签名（sign）的生成方式，具体见官方文档（传参都要参与生成签名，且参数名按照字典序排序，最后接上APP_KEY,转化成大写）
+         */
+        prepayReqHandler.setParameter("sign", Md5Util.MD5Encode(signs, "utf8").toUpperCase());
+        prepayReqHandler.setGateUrl(weichartModel.getGateUrl());
+
+        // 请求地址
+        prepayReqHandler.setGateUrl(gateUrl);
+        String prepayid = prepayReqHandler.sendPrepay();
+        System.out.println(prepayid);
+        // 返回值
+        Map<String, String> map = new HashMap<>();
+
+        // 若获取prepayid成功，将相关信息返回客户端
+        if (isNull(prepayid)) {
+            // 返回值加密
+            map.put("code", "0");
+            map.put("info", "success");
+            map.put("prepayid", prepayid);
+        } else {
+            map.put("code", "1");
+            map.put("info", "获取prepayid失败");
+        }
+        return map;
+    }
+
+    private boolean isNull(String notifyUrl) {
+        return notifyUrl != null && !"".equals(notifyUrl);
+    }
+
+
 }

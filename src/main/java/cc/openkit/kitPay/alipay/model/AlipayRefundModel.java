@@ -2,6 +2,9 @@ package cc.openkit.kitPay.alipay.model;
 
 import java.util.List;
 
+/**
+ * 退款对象
+ */
 public class AlipayRefundModel {
     // 是否必选     最大长度    描述  示例
     // 特殊可选     64   订单支付时传入的商户订单号,不能和 trade_no同时为空。  20150320010101001
