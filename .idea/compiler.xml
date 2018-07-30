@@ -9,8 +9,5 @@
         <module name="open_kit" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="open_kit" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>
